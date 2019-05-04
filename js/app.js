@@ -1,25 +1,4 @@
-// Enemies our player must avoid
-// var Enemy = function() {
-//     // Variables applied to each of our instances go here,
-//     // we've provided one for you to get started
 
-//     // The image/sprite for our enemies, this uses
-//     // a helper we've provided to easily load images
-//     this.sprite = 'images/enemy-bug.png';
-// };
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-// Enemy.prototype.update = function(dt) {
-//     // You should multiply any movement by the dt parameter
-//     // which will ensure the game runs at the same speed for
-//     // all computers.
-// };
-
-// Draw the enemy on the screen, required method for game
-// Enemy.prototype.render = function() {
-//     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-// };
 
 class Enemy{
 
@@ -66,17 +45,19 @@ class Player{
     }
 
     update(dt){
+        allEnemies.forEach(el => {
+            if (el.y == this.y && el.x + 50 >= this.x - 30  && el.x - 50 <= this.x + 30) {
+              this.x = 200;
+              this.y = 400;
+              document.querySelector("body").style.backgroundColor = "red";
+              alert("collision happend")
+              document.location.reload()
         
-        allEnemies.forEach(el => { 
-            let X = Math.round( el.x ) 
-            let Y = Math.round( el.y )
-            if(this.x == X && this.y == Y){ 
-                window.location.reload();
-                
-            }
-
-        })
-    }
+               }
+        });
+        
+    
+    };
 
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -121,8 +102,7 @@ const player = new Player(200,400)
 const E = new Enemy(0,100,100)
 const E1 = new Enemy(0,200,110)
 
-var allEnemies = []
-var allPlayers = []
+let allEnemies = []
 allEnemies.push(E)
 allEnemies.push(E1)
 
