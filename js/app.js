@@ -14,17 +14,9 @@ class Enemy{
 
         if(this.x >= 400){
             this.x = 0
+            window.location.reload();
         }
-        allEnemies.forEach(el => { 
-            let X = Math.round( el.x ) 
-            let Y = Math.round( el.y )
-            if(this.x == X && this.y == Y){ 
-                player.x = 200
-                player.y = 400
-                
-            }
-
-        })
+       
     }
 
     render(){
@@ -46,9 +38,9 @@ class Player{
 
     update(dt){
         allEnemies.forEach(el => {
-            if (el.y == this.y && el.x + 50 >= this.x - 30  && el.x - 50 <= this.x + 30) {
-              this.x = 200;
-              this.y = 400;
+            if(this.x < el.x + 50 && this.x > el.x - 70 && this.y <el.y + 60 && this.y > el.y - 80){ 
+               this.x = 200;
+               this.y = 400; 
               document.querySelector("body").style.backgroundColor = "red";
               alert("collision happend")
               document.location.reload()
